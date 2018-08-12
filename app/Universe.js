@@ -80,19 +80,20 @@ const Universe = function () {
     this.applyRules = neighborsGrid => {
         neighborsGrid.forEach((row, x) => {
             row.forEach((neighbors, y) => {
-                let live = false;
+                let lives = false;
                 if(this.grid[x][y].alive){ // Any live cell ...
                     // ... with fewer than two live neighbors dies, as if by under population.
-                    if(neighbors < 2) live = false;
+                    if(neighbors < 2) lives = false;
                     // ... with two or three live neighbors lives on to the next generation.
-                    if(neighbors == 2 || neighbors == 3) live = true;
+                    if(neighbors == 2 || neighbors == 3) lives = true;
                     // ... with more than three live neighbors dies, as if by overpopulation.    
-                    if(neighbors > 3) live = false;
+                    if(neighbors > 3) lives = false;
                 }else{
                     //Any dead cell with exactly three live neighbors becomes a live cell, as if by reproduction.
-                    if(neighbors == 3) live = true;
+                    if(neighbors == 3) lives = true;
                 }
-                this.grid[x][y] = new Cell(live, x, y)
+                if(lives) this.grid[x][y].live();
+                else this.grid[x][y].dead();
             });
         });
     }
