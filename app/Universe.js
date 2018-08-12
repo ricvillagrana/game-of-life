@@ -1,18 +1,17 @@
 const Cell = require('./Cell');
 
-let gridToCells = grid => { // Convert the 0 and 1 matrix to Cell class matrix
+let gridToCells = grid => { // Convert number matrix into Cell matrix
     let newGrid = [];
     grid.forEach((row, x) => { // X axis
         newGrid[x] = [];
         row.forEach((element, y) => { // Y axis
-            // Asign new cell, died when element equals to 0 and alive when 1
+            // Asign new cell, dead when element equals to 0 and alive when 1
             newGrid[x][y] = new Cell(element == 1, x, y); 
         });
     });
     return newGrid;
 }
 
-// Creating Universe
 const Universe = function (grid) {
     this.grid = gridToCells(grid);
     
@@ -20,18 +19,19 @@ const Universe = function (grid) {
         let output = "";
         let line = ""
         const size = this.getDimentions();
-        for (let i = 0; i < size.x; i++) {
+
+        for (let i = 0; i < size.x; i++) { // Generate line of edges
             line += "══";
         }
-        console.log("╔" + line + "╗");
+        console.log("╔" + line + "╗"); // Top edge
         this.grid.forEach(row => {
-            output += "║"
+            output += "║"; // Left edge
             row.forEach(cell => {
-                output += cell.alive && "██" || "  ";
+                output += cell.alive && "██" || "  "; // Cell alive or dead
             });
-            output += "║\n";
+            output += "║\n"; // Right edge
         });
-        console.log(output + "╚" + line + "╝");
+        console.log(output + "╚" + line + "╝"); // Bottom edge
     }
     
     this.getGrid = () => {
@@ -63,8 +63,8 @@ const Universe = function (grid) {
         let totalNeighbors = 0;
         const size = this.getDimentions();
         
-        for (let x = cell.position.x-1; x <= cell.position.x+1; x++) {
-            for (let y = cell.position.y-1; y <= cell.position.y+1; y++) {
+        for (let x = cell.position.x-1; x <= cell.position.x+1; x++) { // From X-1 to X+1
+            for (let y = cell.position.y-1; y <= cell.position.y+1; y++) { // From Y-1 to Y+1
                 let skip = false;
                 if(x < 0 
                     || x >= size.x 
@@ -73,7 +73,7 @@ const Universe = function (grid) {
                     || (cell.position.x == x && cell.position.y == y)
                 ) skip = true; // Skip if the nighbor is out of bounds
                 
-                if(!skip && this.grid[x][y].alive) totalNeighbors++;
+                if(!skip && this.grid[x][y].alive) totalNeighbors++; // Increments when neighbor exists and it is alive
             }           
         }
         return totalNeighbors;
