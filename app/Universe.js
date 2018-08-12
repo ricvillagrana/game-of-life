@@ -1,10 +1,6 @@
-// Requiring the Cell class
 const Cell = require('./Cell');
-//const grid = require('../data/grids/repeat');
-//const grid = require('../data/grids/spaceships/glider');
-const grid = require('../data/grids/spaceships/lwss');
 
-let gridToCells = gird => { // Convert the 0 and 1 matrix to Cell class matrix
+let gridToCells = grid => { // Convert the 0 and 1 matrix to Cell class matrix
     let newGrid = [];
     grid.forEach((row, x) => { // X axis
         newGrid[x] = [];
@@ -16,9 +12,8 @@ let gridToCells = gird => { // Convert the 0 and 1 matrix to Cell class matrix
     return newGrid;
 }
 
-
 // Creating Universe
-const Universe = function () {
+const Universe = function (grid) {
     this.grid = gridToCells(grid);
     
     this.show = () => { // Show grid in a more friendly way
