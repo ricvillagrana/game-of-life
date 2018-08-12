@@ -1,8 +1,9 @@
 const Universe = require ('./app/Universe');
 const Sleep = require('sleep');
-const grid = require('./data/grids/default');
+const RandomGrid = require('./data/grids/RandomGrid');
 
-universe = new Universe(grid);
+grid = new RandomGrid(30);
+universe = new Universe(grid.getGrid());
 
 while (true) {
     console.log('\033[2J');
