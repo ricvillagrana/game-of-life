@@ -3,7 +3,7 @@ const Sleep = require('sleep');
 const RandomGrid = require('./data/grids/RandomGrid');
 const line = require('./data/grids/patterns/line');
 
-randomGrid = new RandomGrid(30); // Size should be smaller then the console rows
+randomGrid = new RandomGrid(30); // Size should be smaller than the console rows
 // grid = randomGrid.getGrid();
 grid = line; // Line pattern grid
 
