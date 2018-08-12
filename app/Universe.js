@@ -18,13 +18,20 @@ const Universe = function (grid) {
     
     this.show = () => { // Show grid in a more friendly way
         let output = "";
+        let line = ""
+        const size = this.getDimentions();
+        for (let i = 0; i < size.x; i++) {
+            line += "══";
+        }
+        console.log("╔" + line + "╗");
         this.grid.forEach(row => {
+            output += "║"
             row.forEach(cell => {
                 output += cell.alive && "██" || "  ";
             });
-            output += "\n";
+            output += "║\n";
         });
-        console.log(output);
+        console.log(output + "╚" + line + "╝");
     }
     
     this.getGrid = () => {
