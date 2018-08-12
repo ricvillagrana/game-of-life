@@ -1,10 +1,6 @@
-// Requiring the Cell class
 const Cell = require('./Cell');
-//const grid = require('../data/grids/repeat');
-//const grid = require('../data/grids/spaceships/glider');
-const grid = require('../data/grids/spaceships/lwss');
 
-let gridToCells = gird => { // Convert the 0 and 1 matrix to Cell class matrix
+let gridToCells = grid => { // Convert the 0 and 1 matrix to Cell class matrix
     let newGrid = [];
     grid.forEach((row, x) => { // X axis
         newGrid[x] = [];
@@ -16,20 +12,26 @@ let gridToCells = gird => { // Convert the 0 and 1 matrix to Cell class matrix
     return newGrid;
 }
 
-
 // Creating Universe
-const Universe = function () {
+const Universe = function (grid) {
     this.grid = gridToCells(grid);
     
     this.show = () => { // Show grid in a more friendly way
         let output = "";
+        let line = ""
+        const size = this.getDimentions();
+        for (let i = 0; i < size.x; i++) {
+            line += "══";
+        }
+        console.log("╔" + line + "╗");
         this.grid.forEach(row => {
+            output += "║"
             row.forEach(cell => {
                 output += cell.alive && "██" || "  ";
             });
-            output += "\n";
+            output += "║\n";
         });
-        console.log(output);
+        console.log(output + "╚" + line + "╝");
     }
     
     this.getGrid = () => {
@@ -80,19 +82,20 @@ const Universe = function () {
     this.applyRules = neighborsGrid => {
         neighborsGrid.forEach((row, x) => {
             row.forEach((neighbors, y) => {
-                let live = false;
+                let lives = false;
                 if(this.grid[x][y].alive){ // Any live cell ...
                     // ... with fewer than two live neighbors dies, as if by under population.
-                    if(neighbors < 2) live = false;
+                    if(neighbors < 2) lives = false;
                     // ... with two or three live neighbors lives on to the next generation.
-                    if(neighbors == 2 || neighbors == 3) live = true;
+                    if(neighbors == 2 || neighbors == 3) lives = true;
                     // ... with more than three live neighbors dies, as if by overpopulation.    
-                    if(neighbors > 3) live = false;
+                    if(neighbors > 3) lives = false;
                 }else{
                     //Any dead cell with exactly three live neighbors becomes a live cell, as if by reproduction.
-                    if(neighbors == 3) live = true;
+                    if(neighbors == 3) lives = true;
                 }
-                this.grid[x][y] = new Cell(live, x, y)
+                if(lives) this.grid[x][y].live();
+                else this.grid[x][y].dead();
             });
         });
     }

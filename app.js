@@ -1,12 +1,13 @@
 const Universe = require ('./app/Universe');
 const Sleep = require('sleep');
+const RandomGrid = require('./data/grids/RandomGrid');
 
-universe = new Universe();
+grid = new RandomGrid(30);
+universe = new Universe(grid.getGrid());
 
 while (true) {
     console.log('\033[2J');
     universe.show();
     universe.nextGeneration();
-    Sleep.msleep(500);
+    Sleep.msleep(200);
 }
-//console.log("Dimentions: X = " + universe.getDimentions.x + ", Y = " + universe.getDimentions.y)
