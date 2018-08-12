@@ -23,7 +23,7 @@ const Universe = function (grid) {
         for (let i = 0; i < size.x; i++) { // Generate line of edges
             line += "══";
         }
-        console.log("╔" + line + "╗"); // Top edge
+        output += "╔" + line + "╗\n"; // Top edge
         this.grid.forEach(row => {
             output += "║"; // Left edge
             row.forEach(cell => {
