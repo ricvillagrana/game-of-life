@@ -11,4 +11,3 @@ while (true) {
     universe.nextGeneration();
     Sleep.msleep(200);
 }
-//console.log("Dimentions: X = " + universe.getDimentions.x + ", Y = " + universe.getDimentions.y)
