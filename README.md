@@ -5,7 +5,7 @@ In late 1940, John von Neumann defined life as a creation (as a being or organis
 The initial goal of John Conway was to define an interesting and unpredictable cell automaton. Thus, he wanted some configurations to last for a long time before dying, other configurations to go on forever without allowing cycles, etc. It was a significant challenge and an open problem for years before experts on cell automatons managed to prove that, indeed, Conway's Game of Life admitted of a configuration which was alive in the sense of satisfying Von Neumann's two general requirements. While the definitions before Conway's Life were proof-oriented, Conway's construction aimed at simplicity without a priori providing proof the automaton was alive.
 
 ## Running
-You jues need to type this in the project directory:
+You just need to type this in the project directory:
 
     node ./app.js
 
